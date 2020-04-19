@@ -19,7 +19,7 @@ class RabbitChannel(Channel):
         self.rabbit = rabbit_env
 
     def _create_connection(self):
-        if self.connection and self.connection.is_open():
+        if self.connection and self.connection.is_open:
             self.connection.close()
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(
             host=self.rabbit.host,
