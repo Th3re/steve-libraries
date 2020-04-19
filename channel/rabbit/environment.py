@@ -1,17 +1,11 @@
-from ...environment.environmentreader import EnvironmentReader
+import typing
 
 
-class ChannelEnvironment(EnvironmentReader):
-    def __init__(self):
-        super()
-        self.exchange = self.get('exchange')
-        self.topic = self.get('topic')
+ChannelEnvironment = typing.NamedTuple('ChannelEnvironment', [('exchange', str),
+                                                              ('topic', str)])
 
 
-class RabbitEnvironment(EnvironmentReader):
-    def __init__(self):
-        super()
-        self.host = self.get('host')
-        self.port = self.get('port')
-        self.connection_attempts = int(self.get('connection_attempts'))
-        self.retry_delay = int(self.get('retry_delay'))
+RabbitEnvironment = typing.NamedTuple('RabbitEnvironment', [('host', str),
+                                                            ('port', int),
+                                                            ('connection_attempts', int),
+                                                            ('retry_delay', int)])
