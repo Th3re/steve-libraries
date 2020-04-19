@@ -32,9 +32,7 @@ class RabbitChannel(Channel):
 
     def _send_attempt(self, topic, data) -> ChannelResponse:
         self.channel.exchange_declare(exchange=self.exchange, exchange_type=self.__exchange_type)
-        routing_key = f'{self.topic}.{topic}'
-        if self.topic == '':
-            routing_key = topic
+        routing_key = topic if self.topic == '' else f'{self.topic}.{topic}'
         self.channel.basic_publish(
             exchange=self.exchange,
             routing_key=routing_key,
