@@ -1,6 +1,6 @@
 import os
 
-from api.libs.representation.environment import EnvPrint
+from ..representation.environment import EnvPrint
 
 
 class EnvironmentReader(EnvPrint):
