@@ -40,8 +40,9 @@ class RabbitChannel(Channel):
             routing_key=routing_key,
             body=data,
         )
+        LOG.info(f'Sent {data} to {routing_key}')
         return ChannelResponse(
-            message=f"Message uploaded to topic {topic}",
+            message=f"Message uploaded to topic {routing_key}",
             status=ChannelResponse.Status.OK,
         )
 
