@@ -1,6 +1,8 @@
 import abc
 import enum
 
+from ..representation.pretty import PrettyPrint
+
 
 class Message(abc.ABC):
     @abc.abstractmethod
@@ -13,7 +15,7 @@ class Message(abc.ABC):
         pass
 
 
-class ChannelResponse:
+class ChannelResponse(PrettyPrint):
     class Status(enum.Enum):
         OK = "OK"
         ERROR = "ERROR"
