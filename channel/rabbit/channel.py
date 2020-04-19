@@ -19,7 +19,7 @@ class RabbitChannel(Channel):
         self.rabbit = rabbit_env
 
     def _create_connection(self):
-        if self.connection and self.connection.is_open():
+        if self.connection and self.connection.is_open:
             self.connection.close()
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(
             host=self.rabbit.host,
@@ -32,9 +32,7 @@ class RabbitChannel(Channel):
 
     def _send_attempt(self, topic, data) -> ChannelResponse:
         self.channel.exchange_declare(exchange=self.exchange, exchange_type=self.__exchange_type)
-        routing_key = f'{self.topic}.{topic}'
-        if self.topic == '':
-            routing_key = topic
+        routing_key = topic if self.topic == '' else f'{self.topic}.{topic}'
         self.channel.basic_publish(
             exchange=self.exchange,
             routing_key=routing_key,
@@ -42,7 +40,7 @@ class RabbitChannel(Channel):
         )
         LOG.info(f'Sent {data} to {routing_key}')
         return ChannelResponse(
-            message=f"Message uploaded to topic {routing_key}",
+            message=f"Message uploaded to exchange: \"{self.exchange}\", topic \"{routing_key}\"",
             status=ChannelResponse.Status.OK,
         )
 
