@@ -40,4 +40,4 @@ class MongoStore(Store):
     def get(self, identifier):
         query = self.__query_id(identifier)
         document = self.collection.find_one(query)
-        return document
+        return document.get(self.DATA) if document else None
