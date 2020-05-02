@@ -1,6 +1,17 @@
 import pymongo
 
 from .store import Store
+from ...environment import EnvironmentReader
+
+
+class Mongo(EnvironmentReader):
+    def __init__(self):
+        super()
+        self.uri = self.get('uri')
+        self.user = self.get('user')
+        self.password = self.get('password')
+        self.database = self.get('database')
+        self.collection = self.get('collection')
 
 
 class MongoStore(Store):
