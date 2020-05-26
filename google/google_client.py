@@ -1,8 +1,8 @@
 import urllib
 import requests
 
-from api.google.client import Client
-from api.exceptions.connectivity import AuthenticationError, UnknownConnectivityError
+from .client import Client
+from ..exceptions.connectivity import AuthenticationError, UnknownConnectivityError
 
 
 class GoogleClient(Client):
