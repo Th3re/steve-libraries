@@ -26,4 +26,3 @@ class GoogleClient(Client):
 
     def post(self, endpoint, token, params, body):
         return self._request(endpoint, token, requests.post, params, body)
-
