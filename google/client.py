@@ -7,5 +7,5 @@ class Client(abc.ABC):
         pass
 
     @abc.abstractmethod
-    def post(self, endpoint, token, params):
+    def post(self, endpoint, token, params, body):
         pass
