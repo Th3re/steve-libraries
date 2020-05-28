@@ -2,8 +2,8 @@ import logging
 
 import pika.exceptions
 
-from ...channel.channel import Channel, ChannelResponse
 from .environment import ChannelEnvironment, RabbitEnvironment
+from ...channel.channel import Channel, ChannelResponse
 
 LOG = logging.getLogger(__name__)
 
