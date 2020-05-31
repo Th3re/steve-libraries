@@ -38,6 +38,18 @@ class Event(PrettyPrint):
         return body
 
     @staticmethod
+    def from_json(dictionary):
+        start_time = Event.__parse_time({'dateTime': dictionary['start_time']})
+        end_time = Event.__parse_time({'dateTime': dictionary['end_time']})
+        return Event(identifier=dictionary['identifier'],
+                     html_link=dictionary['html_link'],
+                     summary=dictionary['summary'],
+                     location=dictionary.get('location'),
+                     start_time=start_time,
+                     end_time=end_time,
+                     status=dictionary.get('status'))
+
+    @staticmethod
     def from_dict(dictionary):
         start_time = Event.__parse_time(dictionary['start'])
         end_time = Event.__parse_time(dictionary['end'])
