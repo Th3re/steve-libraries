@@ -1,7 +1,14 @@
+import logging
+
 import requests
 
 from .client import Client
 from ..exceptions.connectivity import AuthenticationError, UnknownConnectivityError
+
+LOG = logging.getLogger(__name__)
+requests_log = logging.getLogger("requests.packages.urllib3")
+requests_log.setLevel(logging.DEBUG)
+requests_log.propagate = True
 
 
 class GoogleClient(Client):
@@ -14,6 +21,7 @@ class GoogleClient(Client):
         if token:
             headers['Authorization'] = f'Bearer {token}'
         response = method(url, params=params, headers=headers, json=body)
+        LOG.debug(response)
         if 200 <= response.status_code < 300:
             return response.json()
         if response.status_code == 401:
