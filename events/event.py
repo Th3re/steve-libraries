@@ -9,7 +9,7 @@ class Event(PrettyPrint):
     def __init__(self,
                  identifier: str,
                  html_link: str,
-                 summary: str,
+                 summary: Optional[str],
                  location: Optional[str],
                  start_time: datetime,
                  end_time: datetime,
@@ -43,7 +43,7 @@ class Event(PrettyPrint):
         end_time = Event.__parse_time({'dateTime': dictionary['end_time']})
         return Event(identifier=dictionary['identifier'],
                      html_link=dictionary['html_link'],
-                     summary=dictionary['summary'],
+                     summary=dictionary.get('summary'),
                      location=dictionary.get('location'),
                      start_time=start_time,
                      end_time=end_time,
@@ -55,7 +55,7 @@ class Event(PrettyPrint):
         end_time = Event.__parse_time(dictionary['end'])
         return Event(identifier=dictionary['id'],
                      html_link=dictionary['htmlLink'],
-                     summary=dictionary['summary'],
+                     summary=dictionary.get('summary'),
                      location=dictionary.get('location'),
                      start_time=start_time,
                      end_time=end_time,
